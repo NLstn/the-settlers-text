@@ -21,10 +21,12 @@ public abstract class Building {
             System.out.println("Building " + name + " is already max level");
             return;
         }
-        Map map = Game.getInstance().getMap();
-        if (map.getCurrentCitizenLevel() >= map.getChurch().getMaxCitizenCount()) {
-            System.out.println("Too many citizens, upgrade church");
-            return;
+        if (!isSpecialBuilding()) {
+            Map map = Game.getInstance().getMap();
+            if (map.getCurrentCitizenLevel() >= map.getChurch().getMaxCitizenCount()) {
+                System.out.println("Too many citizens, upgrade church");
+                return;
+            }
         }
 
         level++;
@@ -41,6 +43,10 @@ public abstract class Building {
     @Override
     public String toString() {
         return getName() + " (" + getLevel() + ")";
+    }
+
+    private boolean isSpecialBuilding() {
+        return this instanceof Castle || this instanceof Warehouse || this instanceof Church;
     }
 
 }

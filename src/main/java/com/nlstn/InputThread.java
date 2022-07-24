@@ -9,14 +9,28 @@ public class InputThread extends Thread {
         Scanner scanner = new Scanner(System.in);
 
         while (Game.getInstance().isRunning()) {
+
             String input = scanner.nextLine();
             System.out.println("Command: " + input);
+
+            Game game = Game.getInstance();
+
             switch (input) {
                 case "exit":
-                    Game.getInstance().shutdown();
+                    game.shutdown();
                     break;
                 case "listBuildings":
-                    Game.getInstance().getMap().listBuildings();
+                    game.getMap().listBuildings();
+                    break;
+                case "upgradeChurch":
+                    game.getMap().getChurch().upgrade();
+                    break;
+                case "upgradeWarehouse":
+                    game.getMap().getWarehouse().upgrade();
+                    break;
+                case "upgradeCastle":
+                    game.getMap().getCastle().upgrade();
+                    break;
             }
         }
 

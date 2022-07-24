@@ -22,6 +22,8 @@ public class Map {
 
     public void initBaseBuildings() {
         warehouse = new Warehouse();
+        church = new Church();
+        castle = new Castle();
     }
 
     public void listBuildings() {
