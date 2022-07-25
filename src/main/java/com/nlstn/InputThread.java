@@ -2,7 +2,13 @@ package com.nlstn;
 
 import java.util.Scanner;
 
+import com.nlstn.buildings.resources.LumberJackHut;
+
 public class InputThread extends Thread {
+
+    public InputThread() {
+        super("InputThread");
+    }
 
     public void run() {
 
@@ -30,6 +36,12 @@ public class InputThread extends Thread {
                     break;
                 case "upgradeCastle":
                     game.getMap().getCastle().upgrade();
+                    break;
+                case "buildLumberjack":
+                    game.getMap().addBuilding(new LumberJackHut());
+                    break;
+                case "upgradeLumberjack":
+                    game.getMap().upgradeBuilding(LumberJackHut.class);
                     break;
             }
         }

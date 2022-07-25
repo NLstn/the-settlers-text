@@ -26,23 +26,41 @@ public class Map {
         castle = new Castle();
     }
 
+    public void update() {
+
+        warehouse.update();
+        church.update();
+        castle.update();
+
+        buildings.forEach(building -> building.update());
+    }
+
+    public void addBuilding(Building building) {
+        buildings.add(building);
+    }
+
+    public void upgradeBuilding(Class clazz) {
+        for (Building building : buildings) {
+            if (clazz.isInstance(building) && building.getLevel() != 3) {
+                building.upgrade();
+                return;
+            }
+        }
+    }
+
     public void listBuildings() {
 
         System.out.println("Special Buildings:");
         System.out.println(warehouse);
         System.out.println(church);
 
-        for (Building building : buildings) {
-            System.out.println(building);
-        }
+        buildings.forEach(System.out::println);
     }
 
-    public int getCurrentCitizenLevel() {
+    public int getCurrentCitizenCount() {
         int result = 0;
 
-        for (Building building : buildings) {
-            result += building.getLevel();
-        }
+        buildings.stream().mapToInt(Building::getLevel).sum();
 
         return result;
     }

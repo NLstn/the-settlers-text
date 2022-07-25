@@ -16,6 +16,9 @@ public abstract class Building {
         maxLevel = 3;
     }
 
+    public void update() {
+    }
+
     public void upgrade() {
         if (level >= maxLevel) {
             System.out.println("Building " + name + " is already max level");
@@ -23,12 +26,12 @@ public abstract class Building {
         }
         if (!isSpecialBuilding()) {
             Map map = Game.getInstance().getMap();
-            if (map.getCurrentCitizenLevel() >= map.getChurch().getMaxCitizenCount()) {
+            if (map.getCurrentCitizenCount() >= map.getChurch().getMaxCitizenCount()) {
                 System.out.println("Too many citizens, upgrade church");
                 return;
             }
         }
-
+        System.out.println("Upgrading " + getName());
         level++;
     }
 

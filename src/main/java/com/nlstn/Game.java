@@ -5,6 +5,7 @@ public class Game {
     private static Game instance;
 
     private InputThread input;
+    private Gameloop loop;
 
     private Map map;
 
@@ -19,6 +20,7 @@ public class Game {
     private Game() {
         running = true;
         input = new InputThread();
+        loop = new Gameloop();
         map = new Map();
     }
 
@@ -26,10 +28,15 @@ public class Game {
         System.out.println("Starting Game");
         map.initBaseBuildings();
         input.start();
+        loop.start();
     }
 
     public void shutdown() {
         running = false;
+    }
+
+    public void update() {
+        map.update();
     }
 
     public boolean isRunning() {
