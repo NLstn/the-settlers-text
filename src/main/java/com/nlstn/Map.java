@@ -39,7 +39,7 @@ public class Map {
         buildings.add(building);
     }
 
-    public void upgradeBuilding(Class clazz) {
+    public void upgradeBuilding(Class<? extends Building> clazz) {
         for (Building building : buildings) {
             if (clazz.isInstance(building) && building.getLevel() != 3) {
                 building.upgrade();
